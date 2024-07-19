@@ -187,18 +187,19 @@ class Paymento extends \Opencart\System\Engine\Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if (!$this->request->post['payment_paymento_title']) {
+		if (empty($this->request->post['payment_paymento_title'])) {
 			$this->error['title'] = $this->language->get('error_title');
 		}
-		if (!$this->request->post['payment_paymento_apikey']) {
+		if (empty($this->request->post['payment_paymento_apikey'])) {
 			$this->error['apikey'] = $this->language->get('error_apikey');
 		}
-		if (!$this->request->post['payment_paymento_risk']) {
+		if (!isset($this->request->post['payment_paymento_risk'])) {
 			$this->error['risk'] = $this->language->get('error_risk');
 		}
 
 		return !$this->error;
 	}
+
 	private function setEndpointUrl($apiKey) {
 		$endpointUrl = 'https://api.paymento.io/payment/settings';
 		$callbackUrl = HTTP_CATALOG . 'index.php?route=extension/paymento_gateway/payment/paymento&shf_action=paymento_callback';
@@ -226,5 +227,4 @@ class Paymento extends \Opencart\System\Engine\Controller {
 	
 		return $response;
 	}
-	
 }

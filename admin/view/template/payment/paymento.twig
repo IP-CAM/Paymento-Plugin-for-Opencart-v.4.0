@@ -47,8 +47,7 @@
                 <label class="col-sm-2 col-form-label" for="entry-risk"><span data-toggle="tooltip" title="{{ entry_risk }}">{{ entry_risk }}</span></label>
                 <div class="col-sm-10">
                   <select name="payment_paymento_risk" id="entry-risk" class="form-control">
-                    <option value="2" {% if payment_paymento_risk == 2 %} selected="selected" {% endif %} >{{ text_risk_2 }}</option>
-                    <option value="1" {% if payment_paymento_risk == 1 %} selected="selected" {% endif %} >{{ text_risk_1 }}</option>
+                    <option value="1" {% if payment_paymento_risk == 1 %} selected="selected" {% endif %} >{{ text_risk_2 }}</option>
                     <option value="0" {% if payment_paymento_risk == 0 %} selected="selected" {% endif %} >{{ text_risk_0 }}</option>
                   </select>
                   {% if error_risk %}
