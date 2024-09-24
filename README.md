@@ -22,7 +22,7 @@ Store owners do not need to set product price in crypto, just set fiat currency 
 
 ## Installation
 
-1. Download the latest release ZIP file from the [GitHub repository](https://github.com/paymento/paymento-opencart-plugin/paymento_gateway.ocmod.zip).
+1. Download the latest release ZIP file from the [GitHub repository](https://github.com/paymento/paymento-opencart-plugin/blob/main/paymento_gateway.ocmod.zip).
 2. Log in to your OpenCart admin panel.
 3. Navigate to Extensions > Installer.
 4. Upload and Install "paymento_gateway.ocmod.zip".
