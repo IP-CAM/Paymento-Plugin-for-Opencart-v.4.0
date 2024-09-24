@@ -54,7 +54,7 @@ Once installed and configured, Paymento will appear as a payment option during t
 
 ## Support
 
-For issues related to the plugin, please [open an issue](https://github.com/your-repo-link/issues) on GitHub.
+For issues related to the plugin, please [open an issue](https://github.com/paymento/paymento-opencart-plugin/issues) on GitHub.
 
 For account-related questions or issues with the Paymento service, please contact Paymento support directly.
 
