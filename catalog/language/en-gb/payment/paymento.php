@@ -1,13 +1,12 @@
 <?php
 // Text
-$_['text_title']		= 'Paymento Cryptocurrency Payment';
+$_['text_title']		= 'Paymento (Cryptocurrencies Payment)';
 $_['text_error']		= 'Error';
 $_['text_error_token']	= 'Error Creating Payment Request Token';
 $_['heading_title']             = 'Paymento';
 $_['heading_processing']        = 'Order Processing';
 
 // Text
-$_['text_title']                = 'Paymento Cryptocurrency Payment';
 $_['text_home']                 = 'Home';
 $_['text_cart']                 = 'Shopping Cart';
 $_['text_checkout']             = 'Checkout';
