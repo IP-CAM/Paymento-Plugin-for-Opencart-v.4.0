@@ -36,3 +36,5 @@ $_['error_permission']					 = 'Warning: You do not have permission to modify pay
 $_['error_title']						 = 'Please Enter Paymento Display Title';
 $_['error_apikey']						 = 'Please Enter Paymento API Key';
 $_['error_risk']						 = 'Please Select Paymento Risk Level';
+//v2
+$_['entry_secret_key']                  = 'Paymento Secret Key';

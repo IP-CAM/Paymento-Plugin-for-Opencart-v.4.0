@@ -66,6 +66,12 @@ class Paymento extends \Opencart\System\Engine\Controller {
 		$data['tab_general'] = $this->language->get('tab_general');
 		$data['tab_order_status'] = $this->language->get('tab_order_status');
 
+		if (isset($this->request->post['payment_paymento_secret_key'])) {
+			$data['payment_paymento_secret_key'] = $this->request->post['payment_paymento_secret_key'];
+		} else {
+			$data['payment_paymento_secret_key'] = $this->config->get('payment_paymento_secret_key');
+		}
+
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
@@ -193,6 +199,9 @@ class Paymento extends \Opencart\System\Engine\Controller {
 		if (empty($this->request->post['payment_paymento_apikey'])) {
 			$this->error['apikey'] = $this->language->get('error_apikey');
 		}
+		if (empty($this->request->post['payment_paymento_secret_key'])) {
+			$this->error['secret_key'] = $this->language->get('error_secret_key');
+		}
 		if (!isset($this->request->post['payment_paymento_risk'])) {
 			$this->error['risk'] = $this->language->get('error_risk');
 		}
@@ -201,30 +210,32 @@ class Paymento extends \Opencart\System\Engine\Controller {
 	}
 
 	private function setEndpointUrl($apiKey) {
-		$endpointUrl = 'https://api.paymento.io/payment/settings';
-		$callbackUrl = HTTP_CATALOG . 'index.php?route=extension/paymento_gateway/payment/paymento&shf_action=paymento_callback';
-	
-		$data = json_encode([
-			'apiEndpointPath' => $callbackUrl,
-			'httpMethod' => 1 // HTTP POST
-		]);
-	
-		$ch = curl_init($endpointUrl);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-			'Content-Type: application/json',
-			'Accept: text/plain',
-			'Api-Key: ' . $apiKey
-		));
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-	
-		$response = curl_exec($ch);
-		if (curl_errno($ch)) {
-			error_log('Curl error: ' . curl_error($ch));
-		}
-		curl_close($ch);
-	
-		return $response;
+	$endpointUrl = 'https://api.paymento.io/v1/payment/settings';
+    $ipnUrl = HTTP_CATALOG . 'index.php?route=extension/paymento_gateway/payment/paymento&shf_action=paymento_callback';
+
+    $data = json_encode([
+        'IPN_Url' => $ipnUrl,
+        'IPN_Method' => 1 // HTTP POST
+    ]);
+
+    $ch = curl_init($endpointUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Accept: text/plain',
+        'Api-Key: ' . $apiKey
+    ));
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+    $response = curl_exec($ch);
+    if (curl_errno($ch)) {
+        $this->log->write('Paymento :: Error setting endpoint URL: ' . curl_error($ch));
+    }
+    curl_close($ch);
+
+    return $response;
 	}
+
+
 }
